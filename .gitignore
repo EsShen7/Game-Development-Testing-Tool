@@ -1,6 +1,9 @@
 .venv/
+instance/
 __pycache__/
 *.py[cod]
 .env
 .pytest_cache/
 .vscode/
+.playwright-cli/
+output/

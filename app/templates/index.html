@@ -1,10 +1,34 @@
 <!doctype html>
-<html lang="zh-CN">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>游戏测试管理系统</title></head>
-<body>
-  <main>
-    <h1>游戏测试管理系统</h1>
-    <p>项目骨架已就绪。游戏、测试、Bug、反馈和版本统计功能将在后续阶段实现。</p>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f5f7f8"><title>Playtest Studio</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+  <script defer src="{{ url_for('static', filename='app.js') }}"></script>
+</head>
+<body data-page="{{ page }}">
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="/dashboard" aria-label="Playtest Studio home"><span class="brand-mark">P</span><span>Playtest<span class="brand-light">Studio</span></span></a>
+    <div class="side-caption">WORKSPACE</div>
+    <nav aria-label="Main navigation">
+      <a class="nav-link {{ 'active' if page == 'dashboard' else '' }}" href="/dashboard"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 20 20"><rect x="3" y="3" width="6" height="6" rx="1"/><rect x="11" y="3" width="6" height="4" rx="1"/><rect x="11" y="9" width="6" height="8" rx="1"/><rect x="3" y="11" width="6" height="6" rx="1"/></svg></span>Dashboard</a>
+      <a class="nav-link {{ 'active' if page == 'games' else '' }}" href="/games"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 20 20"><rect x="2.75" y="4" width="14.5" height="12" rx="2"/><path d="M7 8v4M5 10h4m5-1h.01M14 11h.01"/></svg></span>Games</a>
+      <a class="nav-link {{ 'active' if page == 'bugs' else '' }}" href="/bugs"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M7 7.5h6a3 3 0 0 1 3 3v3a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3v-3a3 3 0 0 1 3-3Z"/><path d="M7 7.5 5.5 5M13 7.5 14.5 5M4 10H2m16 0h-2M4 14H2m16 0h-2M8 4.5a2 2 0 0 1 4 0M8 11v3m4-3v3"/></svg></span>Bug tracker</a>
+      <a class="nav-link {{ 'active' if page == 'feedback' else '' }}" href="/feedback"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M10 17a7 7 0 1 0-7-7 7 7 0 0 0 7 7Z"/><path d="M10 6v4l2.5 1.5"/></svg></span>Feedback</a>
+    </nav>
+    <div class="sidebar-bottom"><div class="side-caption">DEMO WORKSPACE</div><p>Changes are saved locally in this workspace.</p><a class="schema-link" href="/api/dashboard">API status <span>↗</span></a></div>
+  </aside>
+  <main class="main-area">
+    <header class="topbar"><button class="menu-button" id="menu-toggle" aria-label="Open navigation"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg></button><div class="breadcrumb">Workspace <span>/</span> <strong id="crumb-page">Dashboard</strong></div>
+      <div class="top-actions"><button class="button secondary small" id="register-tester">Register</button><span class="demo-pill"><i></i> Demo mode</span><label class="identity-label" for="identity-select">Viewing as</label><select id="identity-select" aria-label="Switch demo identity"></select></div>
+    </header>
+    <section class="page-wrap">
+      <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+      <div id="page-content" aria-live="polite"><div class="loading-line"><span></span>Loading workspace…</div></div>
+      <footer class="footer">Playtest Studio <span>·</span> Local demonstration data <span>·</span> <a href="/api/dashboard">API</a></footer>
+    </section>
   </main>
-</body>
-</html>
+</div>
+<div class="dialog-backdrop" id="dialog-backdrop" hidden><section class="dialog" role="dialog" aria-modal="true" aria-labelledby="dialog-title"><div class="dialog-head"><h2 id="dialog-title">Edit record</h2><button class="icon-button" id="dialog-close" aria-label="Close dialog">×</button></div><form id="record-form"><div class="form-body" id="form-body"></div><div class="form-actions"><button class="button secondary" type="button" id="dialog-cancel">Cancel</button><button class="button primary" type="submit" id="form-submit">Save changes</button></div></form></section></div>
+</body></html>
